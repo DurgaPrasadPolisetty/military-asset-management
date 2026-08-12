@@ -1,0 +1,443 @@
+:root {
+  --ink:#18221c;
+  --ink2:#26352b;
+  --olive:#596b3d;
+  --olive-dark:#3f502b;
+  --olive-soft:#e9eee2;
+  --paper:#f7f6f0;
+  --panel:#fffef9;
+  --line:#d8d9ce;
+  --muted:#697267;
+  --green:#3f7448;
+  --red:#a84a3c;
+  --amber:#a97932;
+  --shadow:0 10px 30px rgba(24,34,28,.08);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:
+    linear-gradient(rgba(89,107,61,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(89,107,61,.025) 1px,transparent 1px),
+    var(--paper);
+  background-size:28px 28px;
+}
+button,input,select{font:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid rgba(89,107,61,.18);outline-offset:1px
+}
+
+/* ==================== SHELL ==================== */
+.app-layout{min-height:100vh;width:100%;display:flex;background:transparent}
+.sidebar{
+  width:250px;min-height:100vh;position:fixed;inset:0 auto 0 0;
+  display:flex;flex-direction:column;z-index:1000;
+  background:linear-gradient(180deg,#1c281f,#202c22);
+  color:#fff;border-right:1px solid #344233
+}
+.sidebar-brand{
+  display:flex;align-items:center;gap:12px;padding:24px 20px;
+  border-bottom:1px solid rgba(255,255,255,.09)
+}
+.sidebar-logo{
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.18);border-radius:8px;
+  background:var(--olive);font-size:20px
+}
+.sidebar-brand h2{margin:0;font-size:17px;letter-spacing:.4px}
+.sidebar-brand span{
+  display:block;margin-top:3px;color:#aeb7a9;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase
+}
+.sidebar-nav{flex:1;padding:18px 11px;overflow-y:auto}
+.sidebar-link{
+  position:relative;display:flex;align-items:center;gap:12px;
+  padding:11px 13px;margin-bottom:5px;border:1px solid transparent;
+  border-radius:6px;color:#c9d0c6;text-decoration:none;font-size:13px;font-weight:550;
+  transition:.18s ease
+}
+.sidebar-link:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.07);color:#fff}
+.sidebar-link.active{background:rgba(89,107,61,.45);border-color:rgba(161,178,136,.18);color:#fff}
+.sidebar-link.active:before{
+  content:"";position:absolute;left:-1px;top:8px;bottom:8px;width:3px;
+  background:#b6c58d;border-radius:2px
+}
+.sidebar-icon{width:22px;flex-shrink:0;text-align:center;font-size:16px}
+.sidebar-bottom{padding:14px;border-top:1px solid rgba(255,255,255,.09)}
+.sidebar-user{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.user-avatar{
+  width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  border-radius:6px;background:#3a4838;border:1px solid #52604d;font-weight:700
+}
+.user-info{min-width:0;display:flex;flex-direction:column}
+.user-info strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:12px}
+.user-info span{margin-top:3px;color:#9da89a;font-size:9px;letter-spacing:.8px;text-transform:uppercase}
+.sidebar-logout{
+  width:100%;padding:9px;border:1px solid #4c594a;border-radius:6px;
+  background:transparent;color:#cbd3c8;font-size:12px;cursor:pointer
+}
+.sidebar-logout:hover{background:rgba(255,255,255,.06);border-color:#74806e;color:#fff}
+.app-main{width:calc(100% - 250px);min-height:100vh;margin-left:250px}
+.app-main .dashboard{max-width:none}
+
+/* ==================== SHARED PAGES ==================== */
+.dashboard,.inventory-page,.purchases-page,.transfers-page,.audit-page,
+.assignments-page,.expenditures-page{
+  min-height:100vh;padding:34px 40px;background:transparent
+}
+.dashboard-header,.inventory-header,.purchases-header,.transfers-header,
+.audit-header,.assignments-header,.expenditures-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:25px;margin-bottom:28px
+}
+.dashboard-label,.inventory-eyebrow,.purchases-eyebrow,.transfers-eyebrow,
+.audit-eyebrow,.assignments-eyebrow,.expenditures-eyebrow{
+  margin:0 0 9px;color:var(--olive);font-size:11px;font-weight:800;
+  letter-spacing:2.6px;text-transform:uppercase
+}
+.dashboard-header h1,.inventory-header h1,.purchases-header h1,.transfers-header h1,
+.audit-header h1,.assignments-header h1,.expenditures-header h1{
+  margin:0;color:var(--ink);font-size:35px;line-height:1.1;letter-spacing:-.7px
+}
+.dashboard-header p,.inventory-description,.purchases-description,.transfers-description,
+.audit-description,.assignments-description,.expenditures-description{
+  color:var(--muted);margin:10px 0 0;font-size:14px;line-height:1.55
+}
+.dashboard-header h1:after,.inventory-header h1:after,.purchases-header h1:after,
+.transfers-header h1:after,.audit-header h1:after,.assignments-header h1:after,
+.expenditures-header h1:after{
+  content:"";display:block;width:38px;height:3px;margin-top:10px;background:var(--olive)
+}
+
+/* ==================== BUTTONS ==================== */
+.logout-button,.refresh-button,.inventory-refresh,.purchases-refresh,.purchases-add,
+.transfers-refresh,.transfers-add,.audit-refresh,.assignments-refresh,.assignments-add,
+.expenditures-refresh,.expenditures-add{
+  min-height:41px;padding:0 17px;border-radius:6px;font-size:12px;
+  font-weight:700;letter-spacing:.2px;cursor:pointer
+}
+.logout-button,.purchases-add,.transfers-add,.assignments-add,.expenditures-add,
+.refresh-button,.inventory-refresh{
+  border:1px solid var(--olive-dark);background:var(--olive);color:#fff
+}
+.logout-button:hover,.purchases-add:hover,.transfers-add:hover,.assignments-add:hover,
+.expenditures-add:hover,.refresh-button:hover,.inventory-refresh:hover{
+  background:var(--olive-dark);transform:translateY(-1px)
+}
+.purchases-refresh,.transfers-refresh,.audit-refresh,.assignments-refresh,.expenditures-refresh{
+  border:1px solid var(--line);background:var(--panel);color:var(--ink2)
+}
+.purchases-refresh:hover,.transfers-refresh:hover,.audit-refresh:hover,
+.assignments-refresh:hover,.expenditures-refresh:hover{border-color:#aeb6a5;background:#f4f5ed}
+
+/* ==================== DASHBOARD ==================== */
+.filters,.inventory-filters,.inventory-filter-card,.purchases-filter-card,
+.transfers-filter-card,.audit-filter-card,.assignments-filter-card,.expenditures-filter-card{
+  background:rgba(255,254,249,.94);border:1px solid var(--line);
+  border-radius:8px;box-shadow:var(--shadow)
+}
+.filters{padding:18px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:end}
+.filters label,.filter-field label,.inventory-field label,.purchases-field label,
+.purchase-field label,.transfers-field label,.transfer-field label,.audit-field label,
+.assignments-field label,.assignment-field label,.expenditures-field label,.expenditure-field label{
+  display:block;margin-bottom:7px;color:var(--ink2);font-size:11px;font-weight:750;
+  letter-spacing:.4px;text-transform:uppercase
+}
+.filters select,.filter-field select,.filter-field input,.inventory-field select,.inventory-field input,
+.purchases-field select,.purchase-field select,.purchase-field input,.transfers-field select,
+.transfer-field select,.transfer-field input,.audit-field select,.audit-field input,
+.assignments-field select,.assignment-field select,.assignment-field input,
+.expenditures-field select,.expenditure-field select,.expenditure-field input{
+  width:100%;height:42px;padding:0 11px;border:1px solid #c9cec3;border-radius:6px;
+  background:#fffefa;color:var(--ink);font-size:13px;outline:none;transition:.18s ease
+}
+.filters select:focus,.filter-field select:focus,.filter-field input:focus,
+.inventory-field select:focus,.inventory-field input:focus,.purchases-field select:focus,
+.purchase-field select:focus,.purchase-field input:focus,.transfers-field select:focus,
+.transfer-field select:focus,.transfer-field input:focus,.audit-field select:focus,
+.audit-field input:focus,.assignments-field select:focus,.assignment-field select:focus,
+.assignment-field input:focus,.expenditures-field select:focus,
+.expenditure-field select:focus,.expenditure-field input:focus{
+  border-color:var(--olive);box-shadow:0 0 0 3px rgba(89,107,61,.1)
+}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.metric-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:20px;box-shadow:var(--shadow);border-left:4px solid #87927f
+}
+.metric-card span{
+  display:block;color:var(--muted);font-size:11px;font-weight:750;
+  letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px
+}
+.metric-card strong{color:var(--ink);font-size:29px}
+.closing-card{border-left-color:var(--olive)}
+.movement-card{
+  background:var(--panel);border:1px solid var(--line);margin-top:22px;padding:24px;
+  border-radius:8px;display:flex;justify-content:space-between;align-items:center;
+  box-shadow:var(--shadow)
+}
+.movement-card p{color:var(--muted);margin:0 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.movement-card h2{margin:0;font-size:34px}
+.movement-breakdown{display:flex;gap:36px}
+.movement-breakdown div{text-align:right}
+.movement-breakdown span{display:block;color:var(--muted);font-size:11px;margin-bottom:5px;text-transform:uppercase}
+.movement-breakdown strong{font-size:19px}
+
+/* ==================== MESSAGES / STATES ==================== */
+.loading{text-align:center;padding:50px;color:var(--muted)}
+.error-box,.inventory-error,.purchases-error,.transfers-error,.audit-error,
+.assignments-error,.expenditures-error{
+  margin-bottom:20px;padding:13px 16px;border:1px solid #e2bdb7;
+  border-radius:6px;background:#fbefec;color:#8d3e34;font-size:13px
+}
+.purchases-success,.transfers-success,.assignments-success,.expenditures-success{
+  margin-bottom:20px;padding:13px 16px;border:1px solid #b9cbb1;
+  border-radius:6px;background:#edf4e9;color:#3f6840;font-size:13px
+}
+.table-state,.inventory-state,.purchases-state,.transfers-state,.audit-state,
+.assignments-state,.expenditures-state{
+  min-height:260px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;color:var(--muted);text-align:center
+}
+.table-state p,.inventory-state p,.purchases-state p,.transfers-state p,
+.audit-state p,.assignments-state p,.expenditures-state p{margin:7px 0 0}
+.inventory-empty-icon,.purchases-empty-icon,.transfers-empty-icon,.audit-empty-icon,
+.assignments-empty-icon,.expenditures-empty-icon{margin-bottom:9px;font-size:36px}
+.inventory-spinner,.purchases-spinner,.transfers-spinner,.audit-spinner,
+.assignments-spinner,.expenditures-spinner{
+  width:34px;height:34px;margin-bottom:10px;border:3px solid #d9ddd3;
+  border-top-color:var(--olive);border-radius:50%;animation:tactical-spin .75s linear infinite
+}
+@keyframes tactical-spin{to{transform:rotate(360deg)}}
+
+/* ==================== LOGIN ==================== */
+.login-page{
+  min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(circle at 20% 10%,rgba(89,107,61,.14),transparent 30%),
+             linear-gradient(135deg,#e9e9df,#f7f6f0 50%,#e5e8dc)
+}
+.login-card{
+  position:relative;width:100%;max-width:430px;background:rgba(255,254,249,.97);
+  padding:40px;border-radius:8px;border:1px solid #cfd2c6;
+  box-shadow:0 24px 60px rgba(24,34,28,.13)
+}
+.login-card:before{
+  content:"SECURE ACCESS";position:absolute;top:-11px;left:24px;padding:4px 9px;
+  background:var(--olive);color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px
+}
+.login-header{text-align:center;margin-bottom:30px}
+.logo{
+  width:60px;height:60px;margin:0 auto 17px;display:flex;align-items:center;justify-content:center;
+  border-radius:7px;background:var(--ink2);border:2px solid var(--olive);color:#fff;font-size:27px
+}
+.login-header h1{margin:0;color:var(--ink);font-size:24px;line-height:1.3;font-weight:800}
+.login-header p{margin:9px 0 0;color:var(--muted);font-size:13px}
+.form-group{margin-bottom:18px}
+.form-group label{
+  display:block;margin-bottom:7px;color:var(--ink2);font-size:12px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.4px
+}
+.form-group input{
+  width:100%;padding:12px 13px;border:1px solid #c9cec3;border-radius:6px;
+  background:#fffefa;color:var(--ink);font-size:14px;outline:none
+}
+.form-group input:focus{border-color:var(--olive);box-shadow:0 0 0 3px rgba(89,107,61,.1)}
+.form-group input::placeholder{color:#9ba298}
+.login-error{margin-bottom:17px;padding:11px 13px;border-radius:6px;background:#fbefec;border:1px solid #e2bdb7;color:#8d3e34;font-size:13px}
+.login-button{
+  width:100%;padding:12px 18px;border:1px solid var(--olive-dark);border-radius:6px;
+  background:var(--olive);color:#fff;font-size:14px;font-weight:750;cursor:pointer
+}
+.login-button:hover{background:var(--olive-dark)}
+.login-button:disabled{opacity:.6;cursor:not-allowed}
+.login-footer{
+  margin-top:22px;padding-top:17px;border-top:1px solid var(--line);text-align:center;
+  color:#899187;font-size:10px;letter-spacing:.8px;text-transform:uppercase
+}
+
+/* ==================== CARDS / FORMS ==================== */
+.inventory-filters,.inventory-filter-card,.purchases-filter-card,.transfers-filter-card,
+.audit-filter-card,.assignments-filter-card,.expenditures-filter-card{
+  margin-bottom:22px;padding:21px
+}
+.inventory-filters,.inventory-filter{
+  display:grid;grid-template-columns:repeat(4,1fr) auto;gap:14px;align-items:end
+}
+.inventory-actions,.filter-actions,.purchase-form-actions,.transfer-form-actions,
+.assignment-form-actions,.expenditure-form-actions,.purchases-filter-actions,
+.transfers-filter-actions,.assignments-filter-actions,.expenditures-filter-actions,
+.audit-filter-actions{display:flex;gap:8px}
+.apply-button,.clear-button,.inventory-apply,.inventory-clear,.purchase-submit,.purchase-cancel,
+.purchases-apply,.purchases-clear,.transfer-submit,.transfer-cancel,.transfers-apply,
+.transfers-clear,.audit-apply,.audit-clear,.assignment-submit,.assignment-cancel,
+.assignments-apply,.assignments-clear,.expenditure-submit,.expenditure-cancel,
+.expenditures-apply,.expenditures-clear{
+  height:42px;padding:0 15px;border-radius:6px;font-size:12px;font-weight:750;cursor:pointer
+}
+.apply-button,.inventory-apply,.purchase-submit,.purchases-apply,.transfer-submit,
+.transfers-apply,.audit-apply,.assignment-submit,.assignments-apply,.expenditure-submit,
+.expenditures-apply{border:1px solid var(--olive-dark);background:var(--olive);color:#fff}
+.clear-button,.inventory-clear,.purchase-cancel,.purchases-clear,.transfer-cancel,
+.transfers-clear,.audit-clear,.assignment-cancel,.assignments-clear,.expenditure-cancel,
+.expenditures-clear{border:1px solid #c9cec3;background:#fffefa;color:var(--ink2)}
+
+.purchase-form-card,.transfer-form-card,.assignment-form-card,.expenditure-form-card{
+  margin-bottom:22px;padding:22px;border:1px solid var(--line);border-radius:8px;
+  background:rgba(255,254,249,.96);box-shadow:var(--shadow)
+}
+.purchase-form-header,.transfer-form-title,.assignment-form-title,.expenditure-form-title{margin-bottom:20px}
+.purchase-form-header h2,.transfer-form-title h2,.assignment-form-title h2,.expenditure-form-title h2{
+  margin:0;color:var(--ink);font-size:19px
+}
+.purchase-form-header p,.transfer-form-title p,.assignment-form-title p,.expenditure-form-title p{
+  margin:6px 0 0;color:var(--muted);font-size:12px
+}
+.purchase-form,.transfer-form,.assignment-form,.expenditure-form{
+  display:grid;grid-template-columns:repeat(4,1fr) auto;gap:15px;align-items:end
+}
+.purchases-filter,.transfers-filter,.assignments-filter,.expenditures-filter,.audit-filter{
+  display:grid;grid-template-columns:1fr 1fr auto;gap:15px;align-items:end
+}
+
+/* ==================== TABLES ==================== */
+.inventory-card,.inventory-table-card,.purchases-table-card,.transfers-table-card,
+.audit-table-card,.assignments-table-card,.expenditures-table-card{
+  overflow:hidden;border:1px solid var(--line);border-radius:8px;
+  background:rgba(255,254,249,.96);box-shadow:var(--shadow)
+}
+.table-header,.inventory-table-header,.purchases-table-header,.transfers-table-header,
+.audit-table-header,.assignments-table-header,.expenditures-table-header{
+  padding:20px 24px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(89,107,61,.055),transparent 55%)
+}
+.table-header h2,.inventory-table-header h2,.purchases-table-header h2,
+.transfers-table-header h2,.audit-table-header h2,.assignments-table-header h2,
+.expenditures-table-header h2{
+  margin:0;color:var(--ink);font-size:19px
+}
+.table-header p,.inventory-table-header p,.purchases-table-header p,.transfers-table-header p,
+.audit-table-header p,.assignments-table-header p,.expenditures-table-header p{
+  margin:5px 0 0;color:var(--muted);font-size:11px
+}
+.table-wrapper,.inventory-table-wrapper,.purchases-table-wrapper,.transfers-table-wrapper,
+.audit-table-wrapper,.assignments-table-wrapper,.expenditures-table-wrapper{
+  width:100%;overflow-x:auto
+}
+.inventory-table,.purchases-table,.transfers-table,.audit-table,.assignments-table,.expenditures-table{
+  width:100%;min-width:950px;border-collapse:collapse
+}
+.inventory-table th,.purchases-table th,.transfers-table th,.audit-table th,
+.assignments-table th,.expenditures-table th{
+  padding:13px 17px;background:#eceee7;border-bottom:1px solid #d5d9cf;
+  color:#586157;font-size:10px;font-weight:800;text-align:left;
+  text-transform:uppercase;letter-spacing:.7px;white-space:nowrap
+}
+.inventory-table td,.purchases-table td,.transfers-table td,.audit-table td,
+.assignments-table td,.expenditures-table td{
+  padding:15px 17px;border-bottom:1px solid #e5e6df;color:#3e493f;font-size:12px;white-space:nowrap
+}
+.inventory-table tbody tr:hover,.purchases-table tbody tr:hover,.transfers-table tbody tr:hover,
+.audit-table tbody tr:hover,.assignments-table tbody tr:hover,.expenditures-table tbody tr:hover{
+  background:#f2f4ec
+}
+.inventory-table td small,.purchases-table td small,.transfers-table small,.audit-table small,
+.assignments-table small,.expenditures-table small{
+  display:block;margin-top:4px;color:#899187;font-size:10px
+}
+.inventory-base-name,.purchase-base,.equipment-name,.purchase-date,.purchase-user,.audit-date{
+  color:var(--ink2);font-weight:750
+}
+.inventory-category,.purchase-category,.transfer-category,.assignment-category,.expenditure-category,
+.audit-role,.audit-action,.transfer-status{
+  display:inline-block;padding:5px 8px;border:1px solid #d2d8ca;border-radius:4px;
+  background:#edf0e8;color:#53604e;font-size:9px;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase
+}
+.inventory-positive,.positive{color:var(--green)!important;font-weight:750}
+.inventory-negative,.negative{color:var(--red)!important;font-weight:750}
+.inventory-expended{color:var(--amber)!important;font-weight:750}
+.inventory-closing{
+  display:inline-block;min-width:65px;padding:7px 10px;border:1px solid #b9c7aa;
+  border-radius:4px;background:var(--olive-soft);color:var(--olive-dark);
+  font-weight:800;text-align:center
+}
+.purchase-quantity,.assignment-quantity{
+  display:inline-block;min-width:45px;padding:6px 9px;border:1px solid #b9cbb1;
+  border-radius:4px;background:#edf4e9;color:#477047;font-weight:800;text-align:center
+}
+.transfer-quantity,.expenditure-quantity{
+  display:inline-block;min-width:45px;padding:6px 9px;border:1px solid #dec9a7;
+  border-radius:4px;background:#f8f0df;color:#8b672c;font-weight:800;text-align:center
+}
+.transfer-status.completed,.audit-action.purchase{background:#eaf3e8;color:#477047;border-color:#c1d3ba}
+.audit-action.transfer{background:#edf2f5;color:#496477;border-color:#cbd7df}
+.audit-action.assignment{background:#efeee7;color:#675f42;border-color:#d8d2b8}
+.audit-action.expenditure{background:#f8eee9;color:#95503e;border-color:#dfc1b7}
+.audit-details{max-width:500px;line-height:1.5;color:#5b665c;white-space:normal}
+
+/* ==================== PLACEHOLDERS / FOOTERS ==================== */
+.placeholder-page{min-height:100vh;padding:50px;display:flex;align-items:center;justify-content:center}
+.placeholder-card{
+  width:100%;max-width:550px;padding:45px;text-align:center;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)
+}
+.placeholder-icon{font-size:45px;margin-bottom:14px}
+.placeholder-card h1{margin:0 0 10px;font-size:28px}
+.placeholder-card p{margin:0;color:var(--muted);line-height:1.6}
+.inventory-table-footer,.purchases-table-footer{
+  padding:13px 24px;border-top:1px solid var(--line);background:#f2f3ed;color:#7b857a;font-size:10px
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media(max-width:1200px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .inventory-filter,.inventory-filters,.audit-filter{grid-template-columns:repeat(2,1fr)}
+  .inventory-actions,.audit-filter-actions{grid-column:span 2}
+  .purchase-form,.transfer-form,.assignment-form,.expenditure-form{grid-template-columns:1fr 1fr}
+  .purchase-form-actions,.transfer-form-actions,.assignment-form-actions,.expenditure-form-actions{grid-column:span 2}
+  .purchases-filter,.transfers-filter,.assignments-filter,.expenditures-filter{grid-template-columns:1fr 1fr}
+  .purchases-filter-actions,.transfers-filter-actions,.assignments-filter-actions,.expenditures-filter-actions{grid-column:span 2}
+}
+@media(max-width:800px){
+  .sidebar{width:70px}
+  .sidebar-brand{justify-content:center;padding:20px 10px}
+  .sidebar-brand-text,.sidebar-brand>div:last-child{display:none}
+  .sidebar-link{justify-content:center;padding:12px}
+  .sidebar-link-text,.sidebar-link span:last-child{display:none}
+  .sidebar-icon{width:auto}
+  .sidebar-bottom{padding:10px 8px}
+  .sidebar-user{justify-content:center}
+  .user-info{display:none}
+  .sidebar-logout{font-size:0}
+  .sidebar-logout:after{content:"⇥";font-size:18px}
+  .app-main{width:calc(100% - 70px);margin-left:70px}
+  .dashboard,.inventory-page,.purchases-page,.transfers-page,.audit-page,.assignments-page,.expenditures-page{padding:26px 20px}
+  .dashboard-header,.inventory-header,.purchases-header,.transfers-header,.audit-header,.assignments-header,.expenditures-header{
+    align-items:flex-start;flex-direction:column
+  }
+  .movement-card{flex-direction:column;align-items:flex-start;gap:24px}
+  .movement-breakdown{width:100%;justify-content:space-between}
+}
+@media(max-width:600px){
+  .metrics-grid,.inventory-filter,.inventory-filters,.purchases-filter,.transfers-filter,
+  .assignments-filter,.expenditures-filter,.audit-filter,.purchase-form,.transfer-form,
+  .assignment-form,.expenditure-form{grid-template-columns:1fr}
+  .inventory-actions,.audit-filter-actions,.purchases-filter-actions,.transfers-filter-actions,
+  .assignments-filter-actions,.expenditures-filter-actions,.purchase-form-actions,
+  .transfer-form-actions,.assignment-form-actions,.expenditure-form-actions{
+    grid-column:auto;width:100%
+  }
+  .inventory-actions>*,.audit-filter-actions>*,.purchases-filter-actions>*,
+  .transfers-filter-actions>*,.assignments-filter-actions>*,.expenditures-filter-actions>*,
+  .purchase-form-actions>*,.transfer-form-actions>*,.assignment-form-actions>*,
+  .expenditure-form-actions>*{flex:1}
+  .movement-breakdown{flex-direction:column;gap:14px}
+  .movement-breakdown div{text-align:left}
+  .login-card{padding:32px 24px}
+  .placeholder-page{padding:22px}
+  .placeholder-card{padding:35px 24px}
+}
