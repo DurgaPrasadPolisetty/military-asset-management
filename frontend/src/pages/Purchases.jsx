@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-const API =
+const API_BASE_URL =
   "https://military-asset-management-api-fojk.onrender.com/api";
 
 const getToken = () => {
