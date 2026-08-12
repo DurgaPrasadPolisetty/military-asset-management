@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-
-const API = "http://localhost:5000/api";
+const API =
+  "https://military-asset-management-api-fojk.onrender.com/api";
 
 const getToken = () =>
   localStorage.getItem("token") ||
