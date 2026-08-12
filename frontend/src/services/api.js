@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL =
+  "https://military-asset-management-api-fojk.onrender.com/api";
 
 export const loginUser = async (username, password) => {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -21,38 +22,33 @@ export const loginUser = async (username, password) => {
   return data;
 };
 
-
 export const getAuthToken = () => {
   return localStorage.getItem("token");
 };
 
-
 export const apiRequest = async (endpoint, options = {}) => {
   const token = getAuthToken();
 
-  const response = await fetch(
-    `${API_BASE_URL}${endpoint}`,
-    {
-      ...options,
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
 
-      headers: {
-        "Content-Type": "application/json",
-        ...(token
-          ? {
-              Authorization: `Bearer ${token}`,
-            }
-          : {}),
-        ...(options.headers || {}),
-      },
-    }
-  );
+    headers: {
+      "Content-Type": "application/json",
+
+      ...(token
+        ? {
+            Authorization: `Bearer ${token}`,
+          }
+        : {}),
+
+      ...(options.headers || {}),
+    },
+  });
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      data.message || "Something went wrong"
-    );
+    throw new Error(data.message || "Something went wrong");
   }
 
   return data;
