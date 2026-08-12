@@ -4,6 +4,8 @@ A full-stack, role-based web application for managing and tracking military asse
 
 The system provides centralized visibility into asset inventory, purchases, transfers, assignments, expenditures, and audit activities while enforcing role-based and base-level access control.
 
+live app: https://military-asset-management-wheat.vercel.app/dashboard
+
 ---
 
 ## Table of Contents
