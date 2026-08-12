@@ -1,286 +1,38 @@
-# Military Asset Management System
+# 🪖 Military Asset Management System
 
-A role-based web application for managing and tracking military assets across multiple bases. The system provides centralized visibility into inventory, purchases, transfers, assignments, expenditures, and audit activities.
+A full-stack, role-based web application for managing and tracking military assets across multiple bases.
+
+The system provides centralized visibility into asset inventory, purchases, transfers, assignments, expenditures, and audit activities while enforcing role-based and base-level access control.
 
 ---
 
 ## 📌 Project Overview
 
-The **Military Asset Management System** is designed to help military organizations maintain accurate and auditable records of critical assets across multiple bases.
+The **Military Asset Management System** is designed to maintain accurate, secure, and auditable records of military assets across multiple bases.
 
-The system allows authorized users to:
+The application allows authorized personnel to:
 
 - Monitor asset inventory
 - Record asset purchases
 - Transfer assets between bases
-- Assign assets to personnel/units
+- Assign assets to personnel or units
 - Record asset expenditures
-- Track complete audit history
-- View dashboard-based inventory metrics
-- Enforce role-based and base-level access control
+- Track asset movement
+- Maintain audit logs
+- View inventory metrics through a dashboard
+- Apply base and equipment filters
+- Enforce role-based access control
 
-The application follows a transaction-based inventory model to maintain accurate asset balances.
+The system follows a transaction-based inventory calculation model to maintain accurate asset balances.
 
 ### Inventory Calculation
 
-**Closing Balance = Opening Balance + Net Movement − Assigned − Expended**
-
-Where:
-
-**Net Movement = Purchases + Transfers In − Transfers Out**
-
----
-
-# 🚀 Features
-
-## 🔐 Authentication & Authorization
-
-- Secure login system
-- JWT-based authentication
-- Protected API routes
-- Role-based access control (RBAC)
-- Base-level access restriction
-- Automatic authorization through middleware
-
-### Supported Roles
-
-| Role | Access |
-|---|---|
-| ADMIN | Global system access |
-| BASE_COMMANDER | Access restricted to assigned base |
-| LOGISTICS_OFFICER | Asset logistics and transaction operations |
-
-> User registration is not part of the current implementation. Users are provisioned through the database/seed process.
-
----
-
-# 📊 Dashboard
-
-The dashboard provides an overview of asset movement and inventory.
-
-### Dashboard Metrics
-
-- Opening Balance
-- Purchases
-- Transfers In
-- Transfers Out
-- Net Movement
-- Assigned Assets
-- Expended Assets
-- Closing Balance
-
-### Available Filters
-
-- Base
-- Equipment Type
-- Start Date
-- End Date
-
-Base Commanders are automatically restricted to their assigned base.
-
----
-
-# 📦 Inventory Management
-
-The Inventory module provides a consolidated view of assets across bases.
-
-### Capabilities
-
-- View asset inventory
-- Filter by base
-- Filter by equipment type
-- Track purchases
-- Track incoming transfers
-- Track outgoing transfers
-- Track assignments
-- Track expenditures
-- Calculate closing inventory
-
----
-
-# 🛒 Purchase Management
-
-The Purchase module allows authorized users to record newly acquired assets.
-
-### Features
-
-- Create purchase records
-- Select military base
-- Select equipment type
-- Specify quantity
-- Specify purchase date
-- View purchase history
-- Filter purchase records
-- Automatically create audit records
-
----
-
-# 🔄 Transfer Management
-
-The Transfer module manages movement of assets between military bases.
-
-### Features
-
-- Create asset transfers
-- Specify source base
-- Specify destination base
-- Select equipment type
-- Specify quantity
-- Track transfer status
-- View transfer history
-- Maintain transfer records
-- Audit transfer activity
-
-Transfers are processed using database transactions to maintain data consistency.
-
----
-
-# 👤 Assignment Management
-
-The Assignment module records assets assigned to personnel or operational units.
-
-### Features
-
-- Assign equipment
-- Specify quantity
-- Select base
-- Select equipment type
-- Track assignment history
-- Filter assignment records
-- Maintain audit history
-
----
-
-# 💥 Expenditure Management
-
-The Expenditure module records assets that have been consumed, damaged, or otherwise expended.
-
-### Features
-
-- Record expenditures
-- Specify quantity
-- Select base
-- Select equipment type
-- Specify expenditure date
-- View expenditure history
-- Maintain audit history
-
----
-
-# 📋 Audit Logs
-
-The system maintains an audit trail for important asset-related activities.
-
-Audit records can contain:
-
-- User
-- Action
-- Description/details
-- Timestamp
-
-Examples of audited operations include:
-
-- Purchases
-- Transfers
-- Assignments
-- Expenditures
-
-This provides traceability and accountability for asset changes.
-
----
-
-# 🛠️ Technology Stack
-
-## Frontend
-
-- React
-- Vite
-- JavaScript
-- React Router
-- CSS
-- Responsive UI
-
-## Backend
-
-- Node.js
-- Express.js
-- JWT
-- CORS
-- Helmet
-- dotenv
-
-## Database
-
-- PostgreSQL
-
-## Development & Testing
-
-- Git
-- GitHub
-- Postman
-- PostgreSQL / pgAdmin
-- VS Code
-
----
-
-# 📁 Project Structure
-
 ```text
-military-asset-management/
-│
-├── .gitignore
-├── README.md
-│
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   │
-│   ├── controllers/
-│   │   ├── assetController.js
-│   │   ├── assignmentController.js
-│   │   ├── auditController.js
-│   │   ├── authController.js
-│   │   ├── expenditureController.js
-│   │   ├── purchaseController.js
-│   │   └── transferController.js
-│   │
-│   ├── middlewares/
-│   │   ├── authMiddleware.js
-│   │   ├── errorMiddleware.js
-│   │   └── rbacMiddleware.js
-│   │
-│   ├── routes/
-│   │   ├── assetRoutes.js
-│   │   ├── assignmentRoutes.js
-│   │   ├── auditRoutes.js
-│   │   ├── authRoutes.js
-│   │   ├── expenditureRoutes.js
-│   │   ├── purchaseRoutes.js
-│   │   ├── testRoutes.js
-│   │   └── transferRoutes.js
-│   │
-│   ├── seed.js
-│   ├── server.js
-│   ├── package.json
-│   └── package-lock.json
-│
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-│
-└── frontend/
-    ├── public/
-    ├── src/
-    │   ├── assets/
-    │   ├── components/
-    │   ├── context/
-    │   ├── pages/
-    │   ├── services/
-    │   ├── App.css
-    │   ├── App.jsx
-    │   ├── index.css
-    │   └── main.jsx
-    │
-    ├── package.json
-    ├── package-lock.json
-    └── vite.config.js
+Closing Balance
+=
+Opening Balance
++ Purchases
++ Transfers In
+- Transfers Out
+- Assigned
+- Expended
